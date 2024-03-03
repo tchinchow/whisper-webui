@@ -59,7 +59,7 @@ with gr.Blocks(css=get_css(), title="Transcription", theme="default") as page:
                 with gr.Row() as yt_preview:
                     yt_thumbnail = gr.Image(
                         label="Thumbnail", interactive=False)
-                    yt_preview_data = gr.Markdown(interactive=False)
+                    yt_preview_data = gr.Markdown()
                 yt_audio = gr.Audio(visible=False, type="filepath")
                 with gr.Row():
                     reset_button0 = gr.Button("Reset form", elem_id="clear-button0")
@@ -69,7 +69,7 @@ with gr.Blocks(css=get_css(), title="Transcription", theme="default") as page:
             # Video Tab
             with gr.Tab("Video", id=1):
                 video_file_input1 = gr.Video(
-                    label="Video", source="upload", type="filepath")
+                    label="Video", sources="upload")
                 with gr.Row():
                     reset_button1 = gr.Button("Reset form", elem_id="clear-button1")
                     text_button1 = gr.Button(
@@ -78,7 +78,7 @@ with gr.Blocks(css=get_css(), title="Transcription", theme="default") as page:
             # Audio Tab
             with gr.Tab("Audio", id=2):
                 audio_file_input2 = gr.Audio(
-                    label="Audio", source="upload", type="filepath")
+                    label="Audio", sources="upload", type="filepath")
                 with gr.Row():
                     reset_button2 = gr.Button("Reset form", elem_id="clear-button2")
                     text_button2 = gr.Button(
@@ -87,7 +87,7 @@ with gr.Blocks(css=get_css(), title="Transcription", theme="default") as page:
             # Microphone Recording Tab
             with gr.Tab("Microphone", id=3):
                 audio_file_input3 = gr.Audio(
-                    label="Audio Recording", source="microphone", type="filepath")
+                    label="Audio Recording", sources="microphone", type="filepath")
                 save_recording_button3 = gr.Button("Save Recording")
                 save_recording_out3 = gr.Markdown()
                 with gr.Row():
@@ -115,7 +115,7 @@ with gr.Blocks(css=get_css(), title="Transcription", theme="default") as page:
             with gr.Tab("SRT", elem_id="output5"):
                 text_srt_output5 = gr.Textbox(show_label=False)
             with gr.Tab("Downloads", elem_id="output6"):
-                files_output6 = gr.Files(value=None)
+                files_output6 = gr.Files(value=None, type="filepath")
 
     # Whisper Model Options
     model_language.change(

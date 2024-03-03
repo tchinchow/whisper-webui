@@ -107,7 +107,7 @@ def mp3_to_subtitles(filepath, model_language, model, language):
 
 def video_to_subtitles(filepath, model_language, model, language):
     # convert video to mp3
-    audio_filepath = filepath.rsplit(".", 1)[0] + ".mp3"
+    audio_filepath = str(filepath).rsplit(".", 1)[0] + ".mp3"
     try:
         convert_to_mp3(filepath, audio_filepath)
         # print("Converted video to mp3")

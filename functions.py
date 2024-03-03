@@ -104,6 +104,15 @@ def convert_to_mp3(input_filepath, output_filepath):
 
 
 def audio_to_text(filepath, model_language="multilingual", model="base", language=None, output_path=None):
+    # create files
+    filename = os.path.basename(Path(filepath).stem)
+    current_date = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    txt_path = output_path / current_date / f'{filename}.txt'
+    md_path = output_path / current_date/ f'{filename}.md'
+    json_path = output_path / current_date / f'{filename}.json'
+    json_raw_path = output_path / current_date / f'{filename}_raw.json'
+    srt_path = output_path / current_date / f'{filename}.srt'
+
     # load the choosen model
     lang_code = LANGUAGES[language]
     model_name = model + (".en" if model_language == "english-only" else "")
@@ -120,14 +129,6 @@ def audio_to_text(filepath, model_language="multilingual", model="base", languag
     # format result
     text, md, table, jsn, jsn_raw, srt = combo_formatter(result)
 
-    # create files
-    current_date = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    filename = Path(filepath).stem[:-8]
-    txt_path = output_path / current_date / f'{filename}.txt'
-    md_path = output_path / current_date/f'{filename}.md'
-    json_path = output_path / current_date / f'{filename}.json'
-    json_raw_path = output_path / current_date / f'{filename}_raw.json'
-    srt_path = output_path / current_date / f'{filename}.srt'
     if output_path is not None:
         (output_path / current_date).mkdir(exist_ok=True)
         with open(txt_path, "w") as f:
@@ -141,7 +142,7 @@ def audio_to_text(filepath, model_language="multilingual", model="base", languag
         with open(srt_path, "w") as f:
             f.write(srt)
 
-    return [text, md, table, jsn, jsn_raw, srt], [txt_path, md_path, json_path, json_raw_path, srt_path]
+    return [text, md, table, jsn, jsn_raw, srt], [str(txt_path), str(md_path), str(json_path), str(json_raw_path), str(srt_path)]
 
 
 def remove_file(filepath):
