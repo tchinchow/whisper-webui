@@ -62,27 +62,27 @@ with gr.Blocks(css=get_css(), title="Transcription", theme="default") as page:
                     yt_preview_data = gr.Markdown(interactive=False)
                 yt_audio = gr.Audio(visible=False, type="filepath")
                 with gr.Row():
-                    reset_button0 = gr.Button("Clear", elem_id="clear-button0")
+                    reset_button0 = gr.Button("Reset form", elem_id="clear-button0")
                     text_button0 = gr.Button(
-                        "Submit", elem_id="submit-button0")
+                        "Transcribe", elem_id="submit-button0")
 
             # Video Tab
             with gr.Tab("Video", id=1):
                 video_file_input1 = gr.Video(
                     label="Video", source="upload", type="filepath")
                 with gr.Row():
-                    reset_button1 = gr.Button("Clear", elem_id="clear-button1")
+                    reset_button1 = gr.Button("Reset form", elem_id="clear-button1")
                     text_button1 = gr.Button(
-                        "Submit", elem_id="submit-button1")
+                        "Transcribe", elem_id="submit-button1")
 
             # Audio Tab
             with gr.Tab("Audio", id=2):
                 audio_file_input2 = gr.Audio(
                     label="Audio", source="upload", type="filepath")
                 with gr.Row():
-                    reset_button2 = gr.Button("Clear", elem_id="clear-button2")
+                    reset_button2 = gr.Button("Reset form", elem_id="clear-button2")
                     text_button2 = gr.Button(
-                        "Submit", elem_id="submit-button2")
+                        "Transcribe", elem_id="submit-button2")
 
             # Microphone Recording Tab
             with gr.Tab("Microphone", id=3):
@@ -91,9 +91,9 @@ with gr.Blocks(css=get_css(), title="Transcription", theme="default") as page:
                 save_recording_button3 = gr.Button("Save Recording")
                 save_recording_out3 = gr.Markdown()
                 with gr.Row():
-                    reset_button3 = gr.Button("Clear", elem_id="clear-button3")
+                    reset_button3 = gr.Button("Reset form", elem_id="clear-button3")
                     text_button3 = gr.Button(
-                        "Submit", elem_id="submit-button3")
+                        "Transcribe", elem_id="submit-button3")
 
         # Output
         with gr.Column(scale=3, min_width=500, elem_id="output") as c2_2:
