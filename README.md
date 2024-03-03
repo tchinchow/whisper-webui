@@ -63,4 +63,5 @@ Example: To install PyTorch for CUDA version 11.6: `pip3 install torch torchvisi
 
 ## Credits
 
+- André Markert https://github.com/AndreMarkert/whisper-webui
 - OpenAI Whisper https://openai.com/blog/whisper/, https://github.com/openai/whisper
