@@ -55,6 +55,14 @@ The models `tiny`, `base` and `small` should run on any hardware.
 6. (optional) Change the parameters in the `.env` file
 7. Run `python3 app.py` or `python app.py`
 
+> **Note**:  
+> You can optionally set `GRADIO_SERVER_NAME` environment variable to make the
+> http server listen on a specific interface _(or on all interfaces)_ and
+> set the `GRADIO_SERVER_PORT` to change the default portas well.
+> ```
+> GRADIO_SERVER_PORT=6666 GRADIO_SERVER_NAME=0.0.0.0 python app.py
+> ```
+
 ### Use a GPU
 
 To use it with a GPU, install Nvidia's CUDA or AMD's ROCm drivers.  
