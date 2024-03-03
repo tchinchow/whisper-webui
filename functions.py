@@ -3,6 +3,7 @@ import json
 import whisper
 import os.path
 from datetime import datetime
+from datetime import timedelta
 from moviepy.editor import VideoFileClip
 from pytube.exceptions import RegexMatchError
 from options import LANGUAGES
@@ -64,9 +65,19 @@ def whisper_to_json_raw(whisper_output):
         })
     return output
 
+def whisper_to_srt(whisper_output):
+    output = ''
+ 
+    for segment in whisper_output['segments']:
+        startTime = str(0)+str(timedelta(seconds=int(segment['start'])))+',000'
+        endTime = str(0)+str(timedelta(seconds=int(segment['end'])))+',000'
+        text = segment['text']
+        segmentId = segment['id']+1
+        output += f"{segmentId}\n{startTime} --> {endTime}\n{text.lstrip()}\n\n"
+    return output
 
 def combo_formatter(result):
-    return whisper_to_text(result), whisper_to_timestamp_view(result), whisper_to_timestamp_table(result), whisper_to_json(result), whisper_to_json_raw(result)
+    return whisper_to_text(result), whisper_to_timestamp_view(result), whisper_to_timestamp_table(result), whisper_to_json(result), whisper_to_json_raw(result), whisper_to_srt(result)
 
 
 def get_video_data(url):
@@ -107,7 +118,7 @@ def audio_to_text(filepath, model_language="multilingual", model="base", languag
         result['segments'][i]["text"] = items["text"].strip()
 
     # format result
-    text, md, table, jsn, jsn_raw = combo_formatter(result)
+    text, md, table, jsn, jsn_raw, srt = combo_formatter(result)
 
     # create files
     current_date = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
@@ -116,6 +127,7 @@ def audio_to_text(filepath, model_language="multilingual", model="base", languag
     md_path = output_path / current_date/f'{filename}.md'
     json_path = output_path / current_date / f'{filename}.json'
     json_raw_path = output_path / current_date / f'{filename}_raw.json'
+    srt_path = output_path / current_date / f'{filename}.srt'
     if output_path is not None:
         (output_path / current_date).mkdir(exist_ok=True)
         with open(txt_path, "w") as f:
@@ -126,8 +138,10 @@ def audio_to_text(filepath, model_language="multilingual", model="base", languag
             f.write(json.dumps(jsn, indent=4, ensure_ascii=False))
         with open(json_raw_path, "w") as f:
             f.write(json.dumps(jsn_raw, indent=4, ensure_ascii=False))
+        with open(srt_path, "w") as f:
+            f.write(srt)
 
-    return [text, md, table, jsn, jsn_raw], [txt_path, md_path, json_path, json_raw_path]
+    return [text, md, table, jsn, jsn_raw, srt], [txt_path, md_path, json_path, json_raw_path, srt_path]
 
 
 def remove_file(filepath):

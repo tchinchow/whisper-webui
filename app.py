@@ -112,8 +112,10 @@ with gr.Blocks(css=get_css(), title="Transcription", theme="default") as page:
                 text_json_output3 = gr.JSON(label="JSON")
             with gr.Tab("JSON (raw)", elem_id="output4"):
                 text_json_output4 = gr.JSON(label="JSON")
-            with gr.Tab("Downloads", elem_id="output5"):
-                files_output5 = gr.Files(value=None)
+            with gr.Tab("SRT", elem_id="output5"):
+                text_srt_output5 = gr.Textbox(show_label=False)
+            with gr.Tab("Downloads", elem_id="output6"):
+                files_output6 = gr.Files(value=None)
 
     # Whisper Model Options
     model_language.change(
@@ -131,7 +133,7 @@ with gr.Blocks(css=get_css(), title="Transcription", theme="default") as page:
     text_button0.click(
         fn=youtube_to_subtitles,
         inputs=[text_input0, model_language, model, language, yt_options],
-        outputs=[text_output, text_markdown_output, text_table_output, text_json_output3, text_json_output4, files_output5, yt_audio])
+        outputs=[text_output, text_markdown_output, text_table_output, text_json_output3, text_json_output4, text_srt_output5, files_output6, yt_audio])
     reset_button0.click(
         fn=reset_value, inputs=[], outputs=[text_input0])
     reset_button0.click(
@@ -145,7 +147,7 @@ with gr.Blocks(css=get_css(), title="Transcription", theme="default") as page:
     text_button1.click(
         fn=video_to_subtitles,
         inputs=[video_file_input1, model_language, model, language],
-        outputs=[text_output, text_markdown_output, text_table_output, text_json_output3, text_json_output4, files_output5])
+        outputs=[text_output, text_markdown_output, text_table_output, text_json_output3, text_json_output4, text_srt_output5, files_output6])
     reset_button1.click(
         fn=reset_value, inputs=[], outputs=[video_file_input1])
 
@@ -153,7 +155,7 @@ with gr.Blocks(css=get_css(), title="Transcription", theme="default") as page:
     text_button2.click(
         fn=mp3_to_subtitles,
         inputs=[audio_file_input2, model_language, model, language],
-        outputs=[text_output, text_markdown_output, text_table_output, text_json_output3, text_json_output4, files_output5])
+        outputs=[text_output, text_markdown_output, text_table_output, text_json_output3, text_json_output4, text_srt_output5, files_output6])
     reset_button2.click(
         fn=reset_value, inputs=[], outputs=[audio_file_input2])
 
@@ -167,7 +169,7 @@ with gr.Blocks(css=get_css(), title="Transcription", theme="default") as page:
         fn=mp3_to_subtitles,
         inputs=[audio_file_input3, model_language,
                 model, language],
-        outputs=[text_output, text_markdown_output, text_table_output, text_json_output3, text_json_output4, files_output5])
+        outputs=[text_output, text_markdown_output, text_table_output, text_json_output3, text_json_output4, text_srt_output5, files_output6])
     reset_button3.click(
         fn=reset_value, inputs=[], outputs=[audio_file_input3])
     reset_button3.click(
