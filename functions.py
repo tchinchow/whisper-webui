@@ -1,7 +1,9 @@
+import os
+import sys
 import pytube
 import json
-import whisper
-import os.path
+import whisper, whisper.transcribe
+import tqdm
 from datetime import datetime
 from datetime import timedelta
 from moviepy.editor import VideoFileClip
@@ -192,3 +194,20 @@ def find_in_cache(cache_file, url):
             f.write("\n".join(["\t".join(item) for item in new_file]) + "\n")
 
     return None
+
+# Build a custom progress that will be used to replace the one used by Whisper
+class _CustomProgressBar(tqdm.tqdm):
+    def __init__(self, *args, **kwargs):
+        kwargs["disable"] = False
+        super().__init__(*args, **kwargs)
+        self._current = self.n  # Set the initial value
+
+# Over time we could use this to update the GUI
+#   def update(self, n):
+#       super().update(n)
+#       # Handle progress here
+#       print("Progress: " + str(self._current) + "/" + str(self.total))
+
+print ("FIXME")
+transcribe_module = sys.modules['whisper.transcribe']
+transcribe_module.tqdm.tqdm = _CustomProgressBar
