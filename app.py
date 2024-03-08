@@ -1,6 +1,6 @@
 import gradio as gr
 from logic import *
-from environment import OUTPUT_PATH, DOWNLOAD_PATH, RECORDING_PATH, CACHE_FILE, DEFAULT_MODEL_LANGUAGE, DEFAULT_MODEL, DEFAULT_LANGUAGE
+from environment import OUTPUT_PATH, DOWNLOAD_PATH, RECORDING_PATH, CACHE_FILE, DEFAULT_MODEL_LANGUAGE, DEFAULT_MODEL, DEFAULT_LANGUAGE, VERSION
 
 
 # create output folder
@@ -16,7 +16,8 @@ update_cachefile(CACHE_FILE)
 with gr.Blocks(css=get_css(), title="Transcription", theme="default") as page:
     # Title
     gr.Markdown(
-        """## Generate a transcript for YouTube, a video/audio file or your microphone.""")
+        "## Generate a transcript for YouTube, a video/audio file or your microphone.\n" + (("Version: "+ VERSION) if VERSION != None else "development version")
+    )
 
     # Whisper Model Options
     with gr.Row() as r1:

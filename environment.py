@@ -22,3 +22,4 @@ YT_SAVE_AUDIO = True if getenv("OUTPUT_PATH") in \
 YT_USE_CACHE = True if getenv("YT_USE_CACHE") in \
     ["True", "true", "1"] else False
 CACHE_FILE = "cache.tsv"
+VERSION = getenv("VERSION")
