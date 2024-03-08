@@ -16,7 +16,7 @@ update_cachefile(CACHE_FILE)
 with gr.Blocks(css=get_css(), title="Transcription", theme="default") as page:
     # Title
     gr.Markdown(
-        "## Generate a transcript for YouTube, a video/audio file or your microphone.\n" + (("Version: "+ VERSION) if VERSION != None else "development version")
+        "## Generate a transcript for YouTube, a video/audio file or your microphone.\n" + (("Version: `"+ VERSION + "`") if VERSION != None else "development version")
     )
 
     # Whisper Model Options
@@ -177,4 +177,4 @@ with gr.Blocks(css=get_css(), title="Transcription", theme="default") as page:
         fn=reset_value, inputs=[], outputs=[save_recording_out3]
     )
 
-page.launch()
+page.launch(share=False)
