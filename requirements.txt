@@ -1,5 +1,7 @@
 httpx==0.27.0
-gradio==4.19
+gradio==4.43.0
+pydantic==2.10.6
+pydantic_core==2.27.2
 python-dotenv==1.0.1
 whisper @ git+https://github.com/openai/whisper.git@62fe7f1009a534986ac1d32a4aef8c244d029c28
 pytube==15.0.0
