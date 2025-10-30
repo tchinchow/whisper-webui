@@ -1,13 +1,13 @@
 import os
 import sys
-import pytube
+import pytubefix
 import json
 import whisper, whisper.transcribe
 import tqdm
 from datetime import datetime
 from datetime import timedelta
 from moviepy.editor import VideoFileClip
-from pytube.exceptions import RegexMatchError
+from pytubefix.exceptions import RegexMatchError
 from options import LANGUAGES
 from pathlib import Path
 
@@ -86,14 +86,14 @@ def get_video_data(url):
     if url == "" or url is None:
         return None
     try:
-        video = pytube.YouTube(url)
+        video = pytubefix.YouTube(url)
         return video.thumbnail_url, video.author, video.title, video.length, video.publish_date
     except RegexMatchError:
         return None
 
 
 def download_yt_video(url, output_path):
-    video = pytube.YouTube(url)
+    video = pytubefix.YouTube(url)
     stream = video.streams.get_by_itag(18)
     stream.download(output_path)
     return stream.default_filename
